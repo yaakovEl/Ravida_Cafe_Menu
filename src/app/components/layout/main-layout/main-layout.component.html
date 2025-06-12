@@ -1,0 +1,41 @@
+<!-- רקע וידאו קבוע -->
+<video autoplay muted loop playsinline class="absolute top-0 left-0 w-full h-full object-cover -z-10">
+  <source src="assets/video-bg.mp4" type="video/mp4" />
+</video>
+
+<!-- תוכן משתנה של הדפים -->
+<div class="relative z-10 min-h-screen bg-black bg-opacity-60">
+  <router-outlet></router-outlet>
+
+  <!-- סרגל קבוע למטה עם אייקונים -->
+  <div class="fixed bottom-0 left-0 w-full bg-black bg-opacity-80 py-4 z-50">
+    <div class="flex flex-col items-center">
+      <div class="text-white text-lg font-bold mb-2">בקרו אותנו</div>
+      <div class="flex gap-8 justify-center">
+
+        <!-- Waze -->
+        <a href="https://ul.waze.com/ul?ll=31.78200072%2C35.18343687&navigate=yes&zoom=17&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location"
+          target="_blank" class="text-white text-2xl hover:text-blue-400 transition">
+          <i class="pi pi-car"></i>
+        </a>
+
+        <!-- Google Maps -->
+        <a href="https://maps.app.goo.gl/mBfjzS1akv5LEeDs9" target="_blank"
+          class="text-white text-2xl hover:text-red-400 transition">
+          <i class="pi pi-map-marker"></i>
+        </a>
+
+        <!-- Instagram -->
+        <a href="https://www.instagram.com" target="_blank" class="text-white text-2xl hover:text-pink-400 transition">
+          <i class="pi pi-instagram"></i>
+        </a>
+
+        <!-- TikTok -->
+        <a href="https://www.tiktok.com" target="_blank" class="text-white text-2xl hover:text-gray-300 transition">
+          <i class="pi pi-video"></i>
+        </a>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,56 @@
+<!-- עטיפה עם פונטים -->
+<div class="relative min-h-screen overflow-hidden font-[Varela_Round] font-playpen px-4 sm:px-6 lg:px-16 py-10">
+
+  <!-- גריד כפתורי קטגוריות -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div *ngFor="let section of menu" (click)="openDialog(section)"
+      class="cursor-pointer rounded-2xl shadow-lg hover:shadow-xl transition-all overflow-hidden group relative">
+      <img *ngIf="section.image" [src]="section.image" [alt]="section.category"
+        class="w-full h-40 object-cover transform group-hover:scale-105 transition duration-300" />
+      <div class="absolute inset-0 bg-black bg-opacity-40 flex items-end justify-center p-4 pointer-events-none">
+        <div class="text-white text-xl font-bold drop-shadow pointer-events-auto">
+          {{ section.category }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- פופאפ עם פריטי קטגוריה -->
+  <p-dialog header="{{ selectedCategory?.category }}" [(visible)]="dialogVisible" [modal]="true"
+    [style]="{ width: '90vw', maxWidth: '700px' }" [dismissableMask]="true"
+    [breakpoints]="{ '960px': '95vw', '640px': '100vw' }" contentStyleClass="rtl-dialog">
+
+    <!-- ✅ כאן הוספנו את האנימציה -->
+    <div *ngIf="selectedCategory" dir="rtl" class="text-right px-4 py-2 animate-fade-in">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div *ngFor="let item of selectedCategory.items" class="relative rounded-xl overflow-hidden shadow group">
+
+          <!-- קרוסלה -->
+          <div class="relative w-full h-48 overflow-hidden rounded-xl">
+            <img *ngFor="let img of item.images; let i = index" [src]="img" [alt]="item.name"
+              class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out" [ngClass]="{
+                'opacity-0': i !== item.activeImageIndex,
+                'opacity-100': i === item.activeImageIndex
+              }" />
+          </div>
+
+          <!-- טקסט על התמונה -->
+          <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-4 text-white z-10">
+            <div class="text-lg font-bold">{{ item.name }}</div>
+            <div class="text-sm">{{ item.price }} ₪</div>
+          </div>
+
+          <!-- חצים -->
+          <button (click)="prevImage(item)"
+            class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/70 text-black rounded-full w-8 h-8 z-20 flex items-center justify-center hover:bg-white">
+            ›
+          </button>
+          <button (click)="nextImage(item)"
+            class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/70 text-black rounded-full w-8 h-8 z-20 flex items-center justify-center hover:bg-white">
+            ‹
+          </button>
+        </div>
+      </div>
+    </div>
+  </p-dialog>
+</div>
