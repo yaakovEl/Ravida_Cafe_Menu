@@ -16,11 +16,22 @@
   </div>
 
   <!-- פופאפ עם פריטי קטגוריה -->
-  <p-dialog header="{{ selectedCategory?.category }}" [(visible)]="dialogVisible" [modal]="true"
-    [style]="{ width: '90vw', maxWidth: '700px' }" [dismissableMask]="true"
-    [breakpoints]="{ '960px': '95vw', '640px': '100vw' }" contentStyleClass="rtl-dialog">
+  <p-dialog [(visible)]="dialogVisible" [modal]="true" [style]="{ width: '90vw', maxWidth: '700px' }"
+    [dismissableMask]="true" [breakpoints]="{ '960px': '95vw', '640px': '100vw' }" contentStyleClass="rtl-dialog">
 
-    <!-- ✅ כאן הוספנו את האנימציה -->
+    <ng-template pTemplate="header">
+      <div class="flex justify-between items-center w-full">
+        <span class="text-lg font-bold text-black">
+          {{ selectedCategory?.category }}
+        </span>
+        <button (click)="dialogVisible = false"
+          class="text-gray-600 hover:text-black p-2 rounded-full hover:bg-gray-200 transition text-xl">
+          <i class="pi pi-times"></i>
+        </button>
+      </div>
+    </ng-template>
+
+    <!-- ✅ תוכן -->
     <div *ngIf="selectedCategory" dir="rtl" class="text-right px-4 py-2 animate-fade-in">
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <div *ngFor="let item of selectedCategory.items" class="relative rounded-xl overflow-hidden shadow group">
