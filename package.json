@@ -5,9 +5,10 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:ssr": "ng build && ng run menu-rvida-fe:server",
+    "serve:ssr": "node dist/menu-rvida-fe/server/server.mjs",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "serve:ssr:menu-rvida-fe": "node dist/menu-rvida-fe/server/server.mjs"
+    "test": "ng test"
   },
   "private": true,
   "dependencies": {
