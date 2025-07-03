@@ -1,0 +1,53 @@
+<div class="admin-menu p-4 max-w-3xl mx-auto">
+    <h2 class="text-2xl font-bold mb-6 text-center">ניהול תפריט</h2>
+
+    <!-- הוספת קטגוריה חדשה -->
+    <div class="mb-8 flex items-center gap-4">
+        <input type="text" [(ngModel)]="newCategoryName" placeholder="שם קטגוריה חדשה" class="input-field flex-1" />
+        <button (click)="addCategory()" class="btn">➕ הוסף קטגוריה</button>
+    </div>
+
+    <!-- רשימת קטגוריות -->
+    <div *ngFor="let category of categories; let i = index" class="category-card mb-6 p-4 rounded shadow bg-gray-50">
+        <div class="flex items-center justify-between mb-2">
+            <h3 class="text-xl font-semibold">{{ category.name }}</h3>
+            <button (click)="deleteCategory(i)" class="text-red-500 hover:text-red-700">
+                ✖ מחק קטגוריה
+            </button>
+        </div>
+
+        <!-- רשימת פריטים בקטגוריה -->
+        <ul class="list-disc ml-6 mb-4">
+            <li *ngFor="let item of category.items; let j = index">
+                <div>
+                    <strong>{{ item.name }}</strong> - ₪{{ item.price }}
+                    <div class="text-sm text-gray-600" *ngIf="item.description">
+                        {{ item.description }}
+                    </div>
+                    <button (click)="deleteItem(i, j)" class="text-red-400 ml-2 hover:text-red-600">
+                        מחק
+                    </button>
+                </div>
+            </li>
+        </ul>
+
+        <!-- טופס הוספת פריט חדש -->
+        <div *ngIf="selectedCategoryIndex === i" class="add-item-form mb-4">
+            <div class="flex flex-col gap-3 mb-2">
+                <input type="text" [(ngModel)]="newItemName" placeholder="שם פריט" class="input-field" />
+                <input type="number" [(ngModel)]="newItemPrice" placeholder="מחיר" class="input-field" />
+                <input type="text" [(ngModel)]="newItemDescription" placeholder="תיאור פריט (אופציונלי)"
+                    class="input-field" />
+                <input type="file" (change)="onCategoryImageSelected($event)" class="input-field" />
+
+                <button (click)="addItem()" class="btn self-start">
+                    ➕ הוסף פריט
+                </button>
+            </div>
+        </div>
+
+        <button (click)="selectCategory(i)" class="text-blue-500 hover:text-blue-700">
+            + הוסף פריט
+        </button>
+    </div>
+</div>
